@@ -5,7 +5,7 @@ interface Teacher {
   fullTimeEmployee: boolean;
   yearsOfExperience?: number;
   location: string;
-  [key: string]: any;
+  [key: string]: any; // allows additional properties
 }
 
 // Director interface extending Teacher
@@ -13,7 +13,17 @@ interface Director extends Teacher {
   numberOfReports: number; // mandatory property
 }
 
-// Create a teacher
+// Function interface
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
+}
+
+// Function implementing the interface
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
+  return `${firstName[0]}. ${lastName}`;
+};
+
+// Example Teacher objects
 const teacher1: Teacher = {
   firstName: 'Alice',
   lastName: 'Johnson',
@@ -22,16 +32,29 @@ const teacher1: Teacher = {
   yearsOfExperience: 5,
 };
 
-// Create a director
+const teacher2: Teacher = {
+  firstName: 'Bob',
+  lastName: 'Smith',
+  fullTimeEmployee: false,
+  location: 'Paris',
+};
+
+// Example Director object
 const director1: Director = {
   firstName: 'John',
   lastName: 'Doe',
   fullTimeEmployee: true,
   location: 'London',
   numberOfReports: 10,
-  contract: false,
+  contract: false, // arbitrary property
 };
 
-// Output
+// Outputs
 console.log(teacher1);
+console.log(teacher2);
 console.log(director1);
+
+// Test the printTeacher function
+console.log(printTeacher("John", "Doe"));      // J. Doe
+console.log(printTeacher("Alice", "Johnson")); // A. Johnson
+
