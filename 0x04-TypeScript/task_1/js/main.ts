@@ -1,29 +1,24 @@
-// Teacher interface
 interface Teacher {
   readonly firstName: string;
   readonly lastName: string;
   fullTimeEmployee: boolean;
   yearsOfExperience?: number;
   location: string;
-  [key: string]: any; // allows additional properties
+  [key: string]: any;
 }
 
-// Director interface extending Teacher
 interface Director extends Teacher {
-  numberOfReports: number; // mandatory property
+  numberOfReports: number;
 }
 
-// Function interface
 interface printTeacherFunction {
-  (firstName: string, lastName: string): string;
+  (args: { firstName: string; lastName: string }): string;
 }
 
-// Function declaration implementing the interface
-function printTeacher(firstName: string, lastName: string): string {
+function printTeacher({ firstName, lastName }: { firstName: string; lastName: string }): string {
   return `${firstName[0]}. ${lastName}`;
 }
 
-// Example Teacher objects
 const teacher1: Teacher = {
   firstName: 'Alice',
   lastName: 'Johnson',
@@ -39,21 +34,18 @@ const teacher2: Teacher = {
   location: 'Paris',
 };
 
-// Example Director object
 const director1: Director = {
   firstName: 'John',
   lastName: 'Doe',
   fullTimeEmployee: true,
   location: 'London',
   numberOfReports: 10,
-  contract: false, // arbitrary property
+  contract: false,
 };
 
-// Outputs
 console.log(teacher1);
 console.log(teacher2);
 console.log(director1);
+console.log(printTeacher({ firstName: "John", lastName: "Doe" }));
+console.log(printTeacher({ firstName: "Alice", lastName: "Johnson" }));
 
-// Test the printTeacher function
-console.log(printTeacher("John", "Doe"));      // J. Doe
-console.log(printTeacher("Alice", "Johnson")); // A. John
