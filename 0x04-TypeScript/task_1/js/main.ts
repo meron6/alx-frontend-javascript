@@ -77,4 +77,3 @@ console.log(printTeacher({ firstName: "John", lastName: "Doe" }));
 console.log(printTeacher({ firstName: "Alice", lastName: "Johnson" }));
 console.log(student.displayName());
 console.log(student.workOnHomework());
-
