@@ -5,10 +5,15 @@ interface Teacher {
   fullTimeEmployee: boolean;
   yearsOfExperience?: number;
   location: string;
-  [key: string]: any; // allows additional arbitrary properties
+  [key: string]: any;
 }
 
-// Create teachers
+// Director interface extending Teacher
+interface Director extends Teacher {
+  numberOfReports: number; // mandatory property
+}
+
+// Create a teacher
 const teacher1: Teacher = {
   firstName: 'Alice',
   lastName: 'Johnson',
@@ -17,22 +22,16 @@ const teacher1: Teacher = {
   yearsOfExperience: 5,
 };
 
-const teacher2: Teacher = {
-  firstName: 'Bob',
-  lastName: 'Smith',
-  fullTimeEmployee: false,
-  location: 'Paris',
-};
-
-const teacher3: Teacher = {
+// Create a director
+const director1: Director = {
   firstName: 'John',
   lastName: 'Doe',
-  fullTimeEmployee: false,
+  fullTimeEmployee: true,
   location: 'London',
-  contract: false, // arbitrary property
+  numberOfReports: 10,
+  contract: false,
 };
 
 // Output
 console.log(teacher1);
-console.log(teacher2);
-console.log(teacher3)
+console.log(director1);
