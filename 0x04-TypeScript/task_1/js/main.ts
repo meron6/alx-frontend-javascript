@@ -77,3 +77,35 @@ console.log(printTeacher({ firstName: "John", lastName: "Doe" }));
 console.log(printTeacher({ firstName: "Alice", lastName: "Johnson" }));
 console.log(student.displayName());
 console.log(student.workOnHomework());
+
+// Interface describing the constructor of the class
+interface StudentConstructor {
+  new(firstName: string, lastName: string): StudentClassInterface;
+}
+
+// Interface describing the instance of the class
+interface StudentClassInterface {
+  firstName: string;
+  lastName: string;
+  workOnHomework(): string;
+  displayName(): string;
+}
+
+// Correct class declaration
+class StudentClass implements StudentClassInterface {
+  firstName: string;
+  lastName: string;
+
+  constructor(firstName: string, lastName: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  workOnHomework(): string {
+    return "Currently working";
+  }
+
+  displayName(): string {
+    return this.firstName;
+  }
+}
