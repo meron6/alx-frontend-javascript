@@ -1,50 +1,79 @@
-// Interface describing the student object's structure (the instance side)
-interface Student {
+interface Teacher {
+  readonly firstName: string;
+  readonly lastName: string;
+  fullTimeEmployee: boolean;
+  yearsOfExperience?: number;
+  location: string;
+  [key: string]: any;
+}
+
+interface Director extends Teacher {
+  numberOfReports: number;
+}
+
+interface printTeacherFunction {
+  (args: { firstName: string; lastName: string }): string;
+}
+
+function printTeacher({ firstName, lastName }: { firstName: string; lastName: string }): string {
+  return `${firstName[0]}. ${lastName}`;
+}
+
+interface StudentClassInterface {
   firstName: string;
   lastName: string;
   workOnHomework(): string;
   displayName(): string;
 }
 
-// Interface describing the constructor of the StudentClass (the static side)
-interface StudentConstructor {
-  new(firstName: string, lastName: string): Student;
-}
-
-// Class implementation that adheres to both interfaces
-class StudentClass implements Student {
+class StudentClass implements StudentClassInterface {
   firstName: string;
   lastName: string;
 
-  /**
-   * Creates an instance of StudentClass.
-   * @param firstName - The first name of the student.
-   * @param lastName - The last name of the student.
-   */
   constructor(firstName: string, lastName: string) {
     this.firstName = firstName;
     this.lastName = lastName;
   }
 
-  /**
-   * Returns a string indicating the student is working.
-   * @returns The string "Currently working".
-   */
   workOnHomework(): string {
-    return 'Currently working';
-  }
+    return "Currently working";
+  } // <-- This closing brace was missing
 
-  /**
-   * Returns the first name of the student.
-   * @returns The student's first name.
-   */
   displayName(): string {
     return this.firstName;
   }
 }
 
-// Example usage (optional, for demonstration)
-const student: Student = new StudentClass('John', 'Doe');
+const student = new StudentClass("Alice", "Johnson");
 
+const teacher1: Teacher = {
+  firstName: 'Alice',
+  lastName: 'Johnson',
+  fullTimeEmployee: true,
+  location: 'New York',
+  yearsOfExperience: 5,
+};
+
+const teacher2: Teacher = {
+  firstName: 'Bob',
+  lastName: 'Smith',
+  fullTimeEmployee: false,
+  location: 'Paris',
+};
+
+const director1: Director = {
+  firstName: 'John',
+  lastName: 'Doe',
+  fullTimeEmployee: true,
+  location: 'London',
+  numberOfReports: 10,
+  contract: false,
+};
+
+console.log(teacher1);
+console.log(teacher2);
+console.log(director1);
+console.log(printTeacher({ firstName: "John", lastName: "Doe" }));
+console.log(printTeacher({ firstName: "Alice", lastName: "Johnson" }));
 console.log(student.displayName());
 console.log(student.workOnHomework());
